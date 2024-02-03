@@ -49,9 +49,9 @@ func linuxDistro() string {
 		fmt.Println(err.Error())
 		return ""
 	}
-	clean := strings.Split(string(stdout), ": ")[1]
+	clean := strings.Split(string(stdout), ": ")
 
-	return clean
+	return clean[1]
 
 }
 
