@@ -50,7 +50,7 @@ func linuxDistro() string {
 		return ""
 	}
 	out := string(stdout)
-	clean := strings.SplitAfter(out, " ")[0]
+	clean := strings.SplitAfter(out, " ")[2]
 
 	return clean
 
