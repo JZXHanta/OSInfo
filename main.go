@@ -55,17 +55,37 @@ func linuxDistro() string {
 	cleanest := strings.TrimSpace(cleaner)
 
 	return cleanest
+}
 
+func linuxVersion() string {
+	cmd := "lsb_release"
+	arg1 := "-r"
+
+	c := exec.Command(cmd, arg1)
+
+	stdout, err := c.Output()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	out := string(stdout)
+
+	clean := strings.SplitAfter(out, ":")[1]
+	cleanest := strings.TrimSpace(clean)
+
+	return cleanest
 }
 
 func moreInfo() {
 	switch runtime.GOOS {
 	case "linux":
 		fmt.Println("LINUX FUNCTION HERE")
-		fmt.Print(linuxDistro())
+		fmt.Print("OS      : ", linuxDistro())
+		fmt.Print("Version : ", linuxVersion())
 	case "windows":
-		fmt.Print("OS     : ", windowsOS())
-		fmt.Print("Kernel : ", windowsKernel())
+		fmt.Print("OS      : ", windowsOS())
+		fmt.Print("Version : ", windowsKernel())
 	}
 }
 
