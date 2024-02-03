@@ -7,10 +7,6 @@ import (
 	"strings"
 )
 
-func getPlatform() string {
-	return runtime.GOOS
-}
-
 func windowsOS() string {
 	cmd := "(Get-WmiObject -class Win32_OperatingSystem).Caption"
 	c := exec.Command("powershell", "-NoProfile", cmd)
@@ -34,7 +30,7 @@ func windowsKernel() string {
 		fmt.Println(err.Error())
 		return ""
 	}
-	return string(stdout)
+	return strings.TrimSpace(string(stdout))
 }
 
 func linuxDistro() string {
@@ -52,9 +48,8 @@ func linuxDistro() string {
 	out := string(stdout)
 	clean := strings.SplitAfter(out, " ")[1]
 	cleaner := strings.SplitAfter(clean, ":")[1]
-	cleanest := strings.TrimSpace(cleaner)
 
-	return cleanest
+	return strings.TrimSpace(cleaner)
 }
 
 func linuxVersion() string {
@@ -72,15 +67,13 @@ func linuxVersion() string {
 	out := string(stdout)
 
 	clean := strings.SplitAfter(out, ":")[1]
-	cleanest := strings.TrimSpace(clean)
 
-	return cleanest
+	return strings.TrimSpace(clean)
 }
 
 func moreInfo() {
 	switch runtime.GOOS {
 	case "linux":
-		fmt.Println("LINUX FUNCTION HERE")
 		fmt.Print("OS      : ", linuxDistro())
 		fmt.Print("Version : ", linuxVersion())
 	case "windows":
@@ -90,6 +83,5 @@ func moreInfo() {
 }
 
 func main() {
-	fmt.Println(getPlatform())
 	moreInfo()
 }
