@@ -74,11 +74,11 @@ func linuxVersion() string {
 func moreInfo() {
 	switch runtime.GOOS {
 	case "linux":
-		fmt.Print("OS      : ", linuxDistro())
-		fmt.Print("Version : ", linuxVersion())
+		fmt.Println("OS      : ", linuxDistro())
+		fmt.Println("Version : ", linuxVersion())
 	case "windows":
-		fmt.Print("OS      : ", windowsOS())
-		fmt.Print("Version : ", windowsKernel())
+		fmt.Println("OS      : ", windowsOS())
+		fmt.Println("Version : ", windowsKernel())
 	}
 }
 
