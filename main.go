@@ -3,7 +3,8 @@ package osinfo
 import (
 	"fmt"
 	"os/exec"
-	"runtime"
+
+	// "runtime"
 	"strings"
 )
 
@@ -71,17 +72,17 @@ func LinuxVersion() string {
 	return strings.TrimSpace(clean)
 }
 
-func moreInfo() {
-	switch runtime.GOOS {
-	case "linux":
-		fmt.Println("OS      : ", LinuxDistro())
-		fmt.Println("Version : ", LinuxVersion())
-	case "windows":
-		fmt.Println("OS      : ", WindowsOS())
-		fmt.Println("Version : ", WindowsKernel())
-	}
-}
+// func moreInfo() {
+// 	switch runtime.GOOS {
+// 	case "linux":
+// 		fmt.Println("OS      : ", LinuxDistro())
+// 		fmt.Println("Version : ", LinuxVersion())
+// 	case "windows":
+// 		fmt.Println("OS      : ", WindowsOS())
+// 		fmt.Println("Version : ", WindowsKernel())
+// 	}
+// }
 
-func main() {
-	moreInfo()
-}
+// func main() {
+// 	moreInfo()
+// }
