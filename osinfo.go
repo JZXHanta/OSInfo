@@ -1,4 +1,4 @@
-package osinfo
+package main
 
 import (
 	"fmt"
@@ -83,6 +83,9 @@ func LinuxVersion() string {
 // 	}
 // }
 
-// func main() {
-// 	moreInfo()
-// }
+//	func main() {
+//		moreInfo()
+//	}
+func main() {
+
+}
