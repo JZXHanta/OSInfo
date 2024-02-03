@@ -17,7 +17,7 @@ func windowsOS() string {
 		fmt.Println(err.Error())
 		return ""
 	}
-	return string(stdout)
+	return strings.TrimSpace(string(stdout))
 }
 
 func windowsKernel() string {
