@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func windowsOS() string {
+func WindowsOS() string {
 	cmd := "(Get-WmiObject -class Win32_OperatingSystem).Caption"
 	c := exec.Command("powershell", "-NoProfile", cmd)
 
@@ -20,7 +20,7 @@ func windowsOS() string {
 	return strings.TrimSpace(string(stdout))
 }
 
-func windowsKernel() string {
+func WindowsKernel() string {
 	cmd := "[System.Environment]::OSVersion.Version.Build"
 	c := exec.Command("powershell", "-NoProfile", cmd)
 
@@ -33,7 +33,7 @@ func windowsKernel() string {
 	return strings.TrimSpace(string(stdout))
 }
 
-func linuxDistro() string {
+func LinuxDistro() string {
 	cmd := "lsb_release"
 	arg1 := "-i"
 
@@ -52,7 +52,7 @@ func linuxDistro() string {
 	return strings.TrimSpace(cleaner)
 }
 
-func linuxVersion() string {
+func LinuxVersion() string {
 	cmd := "lsb_release"
 	arg1 := "-r"
 
@@ -74,11 +74,11 @@ func linuxVersion() string {
 func moreInfo() {
 	switch runtime.GOOS {
 	case "linux":
-		fmt.Println("OS      : ", linuxDistro())
-		fmt.Println("Version : ", linuxVersion())
+		fmt.Println("OS      : ", LinuxDistro())
+		fmt.Println("Version : ", LinuxVersion())
 	case "windows":
-		fmt.Println("OS      : ", windowsOS())
-		fmt.Println("Version : ", windowsKernel())
+		fmt.Println("OS      : ", WindowsOS())
+		fmt.Println("Version : ", WindowsKernel())
 	}
 }
 
