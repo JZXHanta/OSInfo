@@ -10,27 +10,56 @@ func getPlatform() string {
 	return runtime.GOOS
 }
 
-func windowsOS() {
+func windowsOS() string {
 	cmd := "(Get-WmiObject -class Win32_OperatingSystem).Caption"
-	// cmd := "echo"
-	// arg := "[System.Environment]::OSVersion.Version.Build"
 	c := exec.Command("powershell", "-NoProfile", cmd)
 
 	stdout, err := c.Output()
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return
+		return ""
 	}
-	fmt.Println(string(stdout))
+	return string(stdout)
+}
+
+func windowsKernel() string {
+	cmd := "[System.Environment]::OSVersion.Version.Build"
+	c := exec.Command("powershell", "-NoProfile", cmd)
+
+	stdout, err := c.Output()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	return string(stdout)
+}
+
+func linuxDistro() string {
+	cmd := "lsb_release"
+	arg1 := "-a"
+
+	c := exec.Command(cmd, arg1)
+
+	stdout, err := c.Output()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	return string(stdout)
+
 }
 
 func moreInfo() {
 	switch runtime.GOOS {
 	case "linux":
 		fmt.Println("LINUX FUNCTION HERE")
+		fmt.Print(linuxDistro())
 	case "windows":
-		windowsOS()
+		fmt.Print("OS     : ", windowsOS())
+		fmt.Print("Kernel : ", windowsKernel())
 	}
 }
 
