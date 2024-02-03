@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 	"runtime"
+	"strings"
 )
 
 func getPlatform() string {
@@ -49,9 +50,9 @@ func linuxDistro() string {
 		return ""
 	}
 	out := string(stdout)
-	// clean := strings.Split(out, " ")[0]
+	clean := strings.SplitAfter(out, " ")[0]
 
-	return out
+	return clean
 
 }
 
