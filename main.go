@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 	"runtime"
+	"strings"
 )
 
 func getPlatform() string {
@@ -38,7 +39,7 @@ func windowsKernel() string {
 
 func linuxDistro() string {
 	cmd := "lsb_release"
-	arg1 := "-a"
+	arg1 := "-i"
 
 	c := exec.Command(cmd, arg1)
 
@@ -48,7 +49,9 @@ func linuxDistro() string {
 		fmt.Println(err.Error())
 		return ""
 	}
-	return string(stdout)
+	clean := strings.Split(string(stdout), ": ")[1]
+
+	return clean
 
 }
 
