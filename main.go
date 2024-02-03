@@ -52,8 +52,9 @@ func linuxDistro() string {
 	out := string(stdout)
 	clean := strings.SplitAfter(out, " ")[1]
 	cleaner := strings.SplitAfter(clean, ":")[1]
+	cleanest := strings.Trim(cleaner, " ")
 
-	return cleaner
+	return cleanest
 
 }
 
